@@ -57,7 +57,7 @@ find_colorpoints = function(words, dims){
   if (length(words$terminalNodes) != 0){
     sorted <- sort(words$terminalNodes)
     beginning_node = sorted[[1]]
-    blue_point <- data.frame(beginning_node, i_to_rc(beginning_node, dims), 1, "darkblue")
+    blue_point <- data.frame(beginning_node, i_to_rc(beginning_node, dims), 1, "blue")
     colnames(blue_point) <- c("point", "row", "col", "colorIndex", "color")
     colordf <- rbind(colordf, (blue_point))
 
