@@ -98,3 +98,4 @@ plotColorNodes = function(letterList, whichWord, dims, wordInfo) #TODO - CLEAN T
   
   return(p)
 }
+

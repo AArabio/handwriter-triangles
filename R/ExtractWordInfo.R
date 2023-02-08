@@ -105,3 +105,4 @@ find_colorpoints = function(words, dims){
 #   }
     
 # }
+

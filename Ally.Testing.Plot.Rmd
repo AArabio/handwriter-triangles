@@ -1,0 +1,99 @@
+---
+title: "testing plot"
+author: "AA"
+date: "2023-02-07"
+output: html_document
+---
+```{r}
+library(handwriter)
+library(igraph)
+library(ggplot2)
+library(stringr)
+library(LearnGeom)
+
+findColour <- function(df, col){
+  require(dplyr)
+  nodes <- df %>%
+    group_by(x,y,colour) %>%
+    filter(colour == col)%>%
+    select(x,y,colour)
+  return(as.data.frame(nodes))
+}
+
+edge.length <- function(x1, y1, x2, y2) {
+  edgelength <- sqrt(((x2 - x1)^2)+((y2 - y1)^2))
+  return(edgelength)
+}
+
+S <- function(x, y, z) {
+  svalue <- 1/2*sum(x, y, z)
+  return(svalue)
+}
+
+tri.area <- function(x, y, z, S) {
+  trianglearea <- sqrt((S)*(S-x)*(S-y)*(S-z))
+  return(trianglearea)
+}
+
+t_col <- function(color, percent = 25, name = NULL) {
+  #      color = color name
+  #    percent = % transparency
+  #       name = an optional name for the color
+
+## Get RGB values for named color
+rgb.val <- col2rgb(color)
+
+## Make new color using input color as base and alpha set by transparency
+t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
+             max = 255,
+             alpha = (100 - percent) * 255 / 100,
+             names = name)
+
+## Save the color
+invisible(t.col)
+}
+###
+
+mygreen <- t_col("green", perc = 75, name = "lt.green")
+mypurple <- t_col("purple", perc = 75, name = "lt.purple")
+myorange <- t_col("darkorange2", perc = 75, name = "lt.orange")
+```
+
+#Writer 1 Session 1 Repetition 1
+
+```{r}
+CSAFE = list()
+
+CSAFE$image = readPNGBinary("CSAFE.png")
+
+plotImage(CSAFE$image)
+
+CSAFE$thin = thinImage(CSAFE$image)
+plotImageThinned(CSAFE$image, CSAFE$thin)
+
+CSAFE_processList = processHandwriting(CSAFE$thin, dim(CSAFE$image))
+
+CSAFE$nodes = CSAFE_processList$nodes
+CSAFE$breaks = CSAFE_processList$breakPoints
+
+plotNodes(CSAFE$image, CSAFE$thin, CSAFE$nodes)
+
+dims = dim(CSAFE$image)
+plotWord(CSAFE_processList$letterList, 1, dims)
+
+wordIndexList = list()
+for(i in CSAFE_processList$letterList){
+  wordIndexList <- append(wordIndexList, i$characterFeatures$wordIndex)
+}
+print(unlist(wordIndexList))
+
+
+words = create_words(CSAFE_processList) 
+words_after_processing = process_words(words, dim(CSAFE$image), TRUE)
+
+plotColorNodes(CSAFE_processList$letterList, 1, dims, words_after_processing) 
+
+plotWord(CSAFE_processList$letterList, 1, dims)
+
+```
+
