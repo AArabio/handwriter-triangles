@@ -84,7 +84,7 @@ plotColorNodes = function(letterList, whichWord, dims, wordInfo) #TODO - CLEAN T
   nodeList <- unlist(nodeList)
   
   #change colors to look nicer when plotting -- https://greggilbertlab.sites.ucsc.edu/teaching/rtransition/
-  #colorpoints_df$color = str_replace(colorpoints_df$color,"pink","hotpink1")
+  #colorpoints_df$color = str_replace(colorpoints_df$color,"yellow","yellow2")
   colorpoints_df$color = str_replace(colorpoints_df$color,"orange","darkorange2")
   
   nodeSize = 4

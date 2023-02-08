@@ -78,7 +78,7 @@ find_colorpoints = function(words, dims){
 
   #Similarly, add node at lowest PURPLE point in total path
   lowest_point_index = rcs[[which.max(rcs[ ,1]), 3]]
-  yellow_point <- data.frame(lowest_point_index, i_to_rc(lowest_point_index, dims), 5, "yellow2")
+  yellow_point <- data.frame(lowest_point_index, i_to_rc(lowest_point_index, dims), 5, "yellow")
   colnames(yellow_point) <- c("point", "row", "col", "colorIndex", "color")
   colordf <- rbind(colordf, yellow_point)
        
